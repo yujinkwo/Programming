@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FileReader fr = new FileReader("words_alpha.txt");
+        /*FileReader fr = new FileReader("words_alpha.txt");
         BufferedReader br = new BufferedReader(fr);
         ArrayList<String> words = new ArrayList<>();
         String line;
@@ -26,6 +26,11 @@ public class Main {
                     System.out.println(finalString);
                 }
             }
-        }
+        }*/
+        Owner owner = new Owner(2);
+        System.out.println(owner.encryptWord("hello"));
+
+        System.out.println("Done");
+
     }
 }
