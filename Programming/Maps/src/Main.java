@@ -1,13 +1,10 @@
-import java.io.*;
-import java.util.ArrayList;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
-    
+    public static void main(String[] args) {
+
         Owner owner = new Owner(2);
-        System.out.println(owner.encryptWord("hello"));
-
+        String encryptWord = owner.encryptWord("hello");
+        System.out.println(encryptWord);
+        System.out.println(owner.decryptWord(encryptWord));
         System.out.println("Done");
-
     }
 }
