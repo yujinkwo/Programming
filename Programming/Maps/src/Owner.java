@@ -33,8 +33,20 @@ public class Owner {
         }
     }
 
+
     public String encryptWord(String word) {
         word = word.toLowerCase();
+        String builder = "";
+        for (int i = 0; i < word.length(); i++) {
+            String letter = word.substring(i, i + 1);
+            builder += decrypt.get(letter);
+        }
+        return builder;
+    }
+
+    public String decryptWord(String word) {
+        word = word.toLowerCase();
+
         String builder = "";
         for (int i = 0; i < word.length(); i++) {
             String letter = word.substring(i, i + 1);
@@ -43,13 +55,4 @@ public class Owner {
         return builder;
     }
 
-    public String decryptWord(String word) {
-        word = word.toLowerCase();
-        String builder = "";
-        for (int i = 0; i > word.length(); i++) {
-            String letter = word.substring(i, i + 1);
-            builder += decrypt.get(letter);
-        }
-        return builder;
-    }
 }
