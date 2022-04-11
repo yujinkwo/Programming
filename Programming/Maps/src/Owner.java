@@ -10,8 +10,7 @@ public class Owner {
     ArrayList<String> alphabet = new ArrayList<>();
     int shift = 0;
 
-    public Owner(String word, int shift) {
-        plaintext = word;
+    public Owner(int shift) {
         this.shift = shift;
         for (String ch : alpha.split("")) {
             alphabet.add(ch);
@@ -22,40 +21,38 @@ public class Owner {
 
     private void encrypt() {
         for (int i = 0; i < 26; i++) {
-            int shiftAmount = i + shift;
-            while (shiftAmount >= 26) {
-                shiftAmount -= 26;
-            }
             encrypt.put(alphabet.get(i), alphabet.get((i + shift) % 26));
         }
     }
 
     private void decrypt() {
-        for (int i = 25; i >= 0; i--) {
-            int shiftAmount = i - shift;
-            while (shiftAmount < 0) {
-                shiftAmount += 26;
-            }
-            decrypt.put(alphabet.get((i + shift) % 26), alphabet.get(i));
+        for (int i = 0; i <26; i++) {
+            String let = alphabet.get((i + shift) % 26);
+            String let2 = alphabet.get(i);
+            decrypt.put(let, let2);
         }
     }
 
-    public String encryptWord() {
-        StringBuilder encryptedWord = new StringBuilder();
-        for (String s : plaintext.split("")) {
-            encryptedWord.append(encrypt.get(s));
+
+    public String encryptWord(String word) {
+        word = word.toLowerCase();
+        String builder = "";
+        for (int i = 0; i < word.length(); i++) {
+            String letter = word.substring(i, i + 1);
+            builder += decrypt.get(letter);
         }
-        return encryptedWord.toString();
+        return builder;
     }
 
-    public String decryptWord() {
-        StringBuilder decryptedWord = new StringBuilder();
-        for (String s : plaintext.split("")) {
-            decryptedWord.append(decrypt.get(s));
+    public String decryptWord(String word) {
+        word = word.toLowerCase();
+
+        String builder = "";
+        for (int i = 0; i < word.length(); i++) {
+            String letter = word.substring(i, i + 1);
+            builder += encrypt.get(letter);
         }
-        return decryptedWord.toString();
+        return builder;
     }
+
 }
-
-
-
