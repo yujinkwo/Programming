@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.*;
+import java.util.Locale;
 
 public class DatabaseHandler {
     private static final String DB_url = "jdbc:derby:database/forum;create=true";
@@ -37,7 +38,7 @@ public class DatabaseHandler {
         try {
             stmt = conn.createStatement();
             DatabaseMetaData dmn = conn.getMetaData();
-            ResultSet tables = dmn.getTables(null, null, TABLE_NAME, null);
+            ResultSet tables = dmn.getTables("forum", "APP", TABLE_NAME.toUpperCase(Locale.ROOT), null);
             if (tables.next()){
                 System.out.println("Table " + TABLE_NAME + " exists");
             }else {
@@ -76,7 +77,7 @@ public class DatabaseHandler {
     public ResultSet execQuery(String qu) {
         ResultSet resultSet;
         try{
-            stmt=conn.createStatement();
+            stmt = conn.createStatement();
             resultSet = stmt.executeQuery(qu);
         } catch (SQLException e) {
             e.printStackTrace();

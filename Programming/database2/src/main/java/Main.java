@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -36,6 +35,11 @@ public class Main {
         String directoryName = parseName(folderPath);
         handler.createTable(directoryName);
         File folder = new File(folderPath);
+        try{
+            FileUtils.forceMkdir(new File(folderPath));
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        }
         Collection<File> files = FileUtils.listFiles(folder, null, true);
         String st2 = "INSERT INTO FOLDERS VALUES ('"+ directoryName + "')";
         handler.execAction(st2);
@@ -62,7 +66,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        handler=new DatabaseHandler();
+        handler = new DatabaseHandler();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose folder path:");
         String path = scanner.nextLine();
@@ -73,6 +77,5 @@ public class Main {
         String tableName = parseName(path);
         addTable(path);
         printTable(tableName);
-        
     }
 }
