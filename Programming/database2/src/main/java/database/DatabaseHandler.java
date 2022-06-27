@@ -77,7 +77,7 @@ public class DatabaseHandler {
     public ResultSet execQuery(String qu) {
         ResultSet resultSet;
         try{
-            stmt = conn.createStatement();
+            stmt=conn.createStatement();
             resultSet = stmt.executeQuery(qu);
         } catch (SQLException e) {
             e.printStackTrace();
